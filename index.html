@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>순간의 재해석</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #63FF3C;
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @font-face {
+            font-family: 'Paperlogy-8ExtraBold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .container {
+            display: none;
+            text-align: center;
+        }
+
+        .active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title-bold {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .title-light {
+            font-family: 'Pretendard-Regular', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .random-number {
+            font-size: calc(5vw);
+            display: flex;
+            justify-content: center;
+            gap: 0.2em;
+        }
+
+        .random-number span {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #63FF3C;
+            color: #121212;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            margin-top: 20px;
+        }
+
+        .input-field {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 첫 번째 화면 -->
+    <div class="container active" id="formScreen">
+        <div class="title-bold">순간의 재해석</div>
+        <div class="title-light">이름과 날짜를 입력하세요.</div>
+        <input class="input-field" type="text" id="name" placeholder="이름">
+        <input class="input-field" type="date" id="date">
+        <br>
+        <button class="btn" onclick="goToRandomScreen()">다음</button>
+    </div>
+
+    <!-- 두 번째 화면 -->
+    <div class="container" id="randomScreen">
+        <div class="random-number" id="randomNumber"></div>
+    </div>
+
+    <script>
+        function goToRandomScreen() {
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+            if (!name || !date) {
+                alert('이름과 날짜를 입력하세요!');
+                return;
+            }
+
+            // 첫 번째 화면 숨기기
+            document.getElementById('formScreen').classList.remove('active');
+            document.getElementById('formScreen').style.display = 'none';
+
+            // 두 번째 화면 보이기
+            document.getElementById('randomScreen').classList.add('active');
+
+            // 10글자의 랜덤 숫자 생성
+            const randomNumber = Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join('');
+
+            const randomNumberElement = document.getElementById('randomNumber');
+
+            // 타이핑 효과
+            let i = 0;
+            function typeEffect() {
+                if (i < randomNumber.length) {
+                    const span = document.createElement('span');
+                    span.textContent = randomNumber.charAt(i);
+                    randomNumberElement.appendChild(span);
+                    i++;
+                    setTimeout(typeEffect, 100); 
+                }
+            }
+
+            typeEffect();
+        }
+    </script>
+
+</body>
+</html>
