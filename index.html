@@ -91,7 +91,7 @@
     <!-- 첫 번째 화면 -->
     <div class="container active" id="formScreen">
         <div class="title-bold">순간의 재해석</div>
-        <div class="title-light">이름과 날짜를 입력하세요.</div>
+        <div class="title-light">이름과, 오늘 날짜를 입력하세요.<br>입력칸 오른쪽의 달력 버튼을 누르고 선택하시면 됩니다.</div>
         <input class="input-field" type="text" id="name" placeholder="이름">
         <input class="input-field" type="date" id="date">
         <br>
@@ -108,7 +108,7 @@
             const name = document.getElementById('name').value;
             const date = document.getElementById('date').value;
             if (!name || !date) {
-                alert('이름과 날짜를 입력하세요!');
+                alert('이름과, 오늘 날짜를 입력하세요!');
                 return;
             }
 
